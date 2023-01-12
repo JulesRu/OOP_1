@@ -1,22 +1,58 @@
 package ru.netology;
 
 public class Radio {
+    private int currentRadioStation;
+    private int currentVolume;
+    private int minRadioStation = 0;
+    private int maxRadioStation;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int radioStationsQuantity;
 
-    public int currentRadioStation;
-    public int currentVolume;
+    public Radio() {
+        this.radioStationsQuantity = 10;
+        this.maxRadioStation = this.radioStationsQuantity - 1;
+
+        /*Тут появился вопрос: является ли код в этом конструкторе избыточным? Логичнее будет просто написать:
+        this.maxRadioStation = 9; ? */
+    }
+
+    public Radio(int radioStationsQuantity) {
+        this.maxRadioStation = radioStationsQuantity - 1;
+    }
+
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
 
+
     public int getCurrentVolume() {
         return currentVolume;
     }
 
+    public void setCurrentRadioStation(int newCurrentRadioStation) {
+        if (newCurrentRadioStation < minRadioStation) {
+            return;
+        }
+        if (newCurrentRadioStation > maxRadioStation) {
+            return;
+        }
+        currentRadioStation = newCurrentRadioStation;
+        //System.out.println("К сожалению, Вы ввели несуществующий номер станции. Пожалуйста, выберите номер от 0 до 9.");
+    }
+
 
     public int nextRadioStation() {
-        if (currentRadioStation == 9) {
-            currentRadioStation = 0;
+        if (currentRadioStation == maxRadioStation) {
+            currentRadioStation = minRadioStation;
         } else {
             currentRadioStation++;
         }
@@ -24,33 +60,33 @@ public class Radio {
     }
 
     public int prevRadioStation() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+        if (currentRadioStation == minRadioStation) {
+            currentRadioStation = maxRadioStation;
         } else {
             currentRadioStation--;
         }
         return currentRadioStation;
     }
 
-    public void setCurrentRadioStation(int newCurrentRadioStation) {
-        if (newCurrentRadioStation < 0) {
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        currentRadioStation = newCurrentRadioStation;
-        //System.out.println("К сожалению, Вы ввели несуществующий номер станции. Пожалуйста, выберите номер от 0 до 9.");
+        currentVolume = newCurrentVolume;
     }
 
+
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
         }
     }
