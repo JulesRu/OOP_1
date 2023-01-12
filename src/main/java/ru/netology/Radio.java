@@ -49,14 +49,6 @@ public class Radio {
         //System.out.println("К сожалению, Вы ввели несуществующий номер станции. Пожалуйста, выберите номер от 0 до 9.");
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if ((newCurrentVolume > maxVolume) && (newCurrentVolume < minVolume)) {
-            return;
-        } else {
-            currentVolume = newCurrentVolume;
-        }
-    }
-
 
     public int nextRadioStation() {
         if (currentRadioStation == maxRadioStation) {
@@ -74,6 +66,16 @@ public class Radio {
             currentRadioStation--;
         }
         return currentRadioStation;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
     }
 
 
